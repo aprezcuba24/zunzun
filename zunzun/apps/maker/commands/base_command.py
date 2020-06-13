@@ -10,7 +10,7 @@ class BaseCommand(Command):
     def _create_file(self, module, name: str, extencion: str = "py"):
         if name.find(".") > -1:
             before, resource_name = name.rsplit(".", 1)
-            resource_path = [] if before.find(".") == -1 else before.split(".")
+            resource_path = before.split(".")
         else:
             resource_path = []
             resource_name = name

@@ -65,7 +65,7 @@ def register(paypal: PaypalService):
     paypal.call_a_method()
     return "Register"
 ```
-In a function class, we can inject dependencies in the constructor or in any function.
+In a controller class, we can inject dependencies in the constructor or in any function.
 ```python
 from zunzun import Response
 from main import router
@@ -82,7 +82,7 @@ class RoleController:
 ## Commands
 Commands allow us to implement command line features. To do that we can use the following command.
 ```
-python zunzun.py maker command role
+python manager.py maker command role
 ```
 Where "role" will be the name of the command. This command will create the following file `app/commands/role.py`.
 ```python
@@ -106,12 +106,12 @@ class roleCommand(Command):
 ```
 To use the new command we can type the following in the console.
 ```
-python zunzun.py app role "An argument value" --some-option="An option value"
+python manager.py app role "An argument value" --some-option="An option value"
 ```
 ## Listener
 The listener allows us to implement the Event-Dispatcher pattern. To create a new listener with its signal we can use the following command.
 ```
-python zunzun.py maker listener Role Role
+python manager.py maker listener Role Role
 ```
 Where the first word "Role" will be the listener name and the second will be the signal name.
 The command will generate the following files:
@@ -142,7 +142,7 @@ class RoleListener:
 ## Services
 We can create classes to implement any logic that we need. For example to create a service to integrate Paypal we can use the following command.
 ```
-python zunzun.py maker service Paypal
+python manager.py maker service Paypal
 ```
 The command will create the file `app/services/paypal.py` with the following code.
 ```python
@@ -163,7 +163,7 @@ Zunzun uses **SQLAlchemy** to implement the ORM features. The framework uses two
 
 To create the model and its repository we can use the following command.
 ```
-python zunzun.py orm model_create Role
+python manager.py orm model_create Role
 ```
 The model will be
 ```python

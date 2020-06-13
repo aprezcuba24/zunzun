@@ -1,6 +1,7 @@
 from .. import inspect
 from werkzeug.routing import Map, Rule
 from injector import Injector, inject, singleton
+from .request import Request
 
 
 @singleton
@@ -26,6 +27,8 @@ class Router:
     def _load_parameter_by_type(self, parameters):
         values = dict()
         for k, v in parameters.items():
+            if v == Request:
+                continue
             values[k] = self._create_object(v)
         return values
 

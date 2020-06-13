@@ -36,6 +36,6 @@ class {name}(Command):
 
     def handle(self, some_option, some_argument):
         click.echo(
-            f"roleCommand [some_argument: {some_argument}] [some_option: {some_option}]"
+            f"{name} [some_argument: {some_argument}] [some_option: {some_option}]"
         )
 """

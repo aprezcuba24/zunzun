@@ -23,10 +23,11 @@ class BaseClassCreator(BaseCommand):
         del kwargs["name"]
         app: App = self.app_register.get(kwargs["app"])
         module = self._get_module(app)
-        file, name, _ = self._create_file(module, name)
+        file, name, path_name = self._create_file(module, name)
         class_name = self._class_name(name)
         self._write_text(file, self._template, name=class_name, **kwargs)
-        self._import_init_module(module.__file__, name, class_name)
+        path_name = f"{path_name}.{name}" if path_name else name
+        self._import_init_module(module.__file__, path_name, class_name)
         click.echo(file)
 
     _template = ""

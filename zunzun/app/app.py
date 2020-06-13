@@ -24,8 +24,11 @@ class App:
         pass
 
     def get_commands(self):
+        params = "commands", "core.commands"
+        if not self.has_module(*params):
+            return
         return self.command_register.add_commands(
-            Group(self.name), self.get_or_create_module("commands", "core.commands")
+            Group(self.name), self.get_or_create_module(*params)
         )
 
     def _register_listeners(self):
@@ -35,12 +38,19 @@ class App:
     def get_config(self, name, default):
         return default
 
-    def get_or_create_module(self, name, config_name=None):
+    def has_module(self, name, config_name):
+        folder = self._get_module_folder(name, config_name)
+        return folder.is_dir()
+
+    def _get_module_folder(self, name, config_name=None):
         if config_name:
             name = self.get_config(config_name, name)
         file = inspect.getfile(self.__class__)
         parent = Path(file).parent
-        folder = Path(f"{parent}/{name}")
+        return Path(f"{parent}/{name}")
+
+    def get_or_create_module(self, name, config_name=None):
+        folder = self._get_module_folder(name, config_name)
         if not folder.is_dir():
             folder.mkdir()
         init_file = Path(f"{folder}/__init__.py")

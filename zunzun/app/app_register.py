@@ -31,5 +31,8 @@ class AppRegister:
     def commands(self):
         group = Group(self.name)
         for _, app in self.apps.items():
-            group.add_command(app.get_commands())
+            current = app.get_commands()
+            if not current:
+                continue
+            group.add_command(current)
         return group

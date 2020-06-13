@@ -16,8 +16,7 @@ class ControllerCommand(BaseClassCreator):
     def _get_module(self, app: App):
         return app.get_or_create_module("controllers", "core.controllers")
 
-    _template = """from zunzun import Response
-from main import router
+    _template = """from main import router
 
 class {name}:
     @router.get('{route}')
